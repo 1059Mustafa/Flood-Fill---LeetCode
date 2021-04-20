@@ -1,0 +1,31 @@
+class Solution {
+public:
+    
+    void dfs(vector<vector<int>>& image, int x, int y, int oldc, int newc, int r, int c)
+    {
+        if(x<0||y<0||x>=r||y>=c||image[x][y]!=oldc)
+        {
+            return;
+        }
+        if(image[x][y]==newc)
+        {
+            return;
+        }
+        image[x][y]=newc;
+        
+        dfs(image,x+1,y,oldc,newc,r,c);
+        dfs(image,x-1,y,oldc,newc,r,c);
+        dfs(image,x,y+1,oldc,newc,r,c);
+        dfs(image,x,y-1,oldc,newc,r,c);
+        
+    }
+    
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) 
+    {
+        int oldColor=image[sr][sc];
+        
+        dfs(image,sr,sc,oldColor,newColor,image.size(),image[0].size());
+        return image;
+        
+    }
+};
